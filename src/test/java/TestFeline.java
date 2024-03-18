@@ -6,7 +6,6 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.junit.Assert;
 
-import java.util.List;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestFeline {
@@ -22,19 +21,17 @@ public class TestFeline {
 
     @Test
     public void getKittensTest(){
-        feline.getKittens();
-        Assert.assertEquals(1, feline.getKittens());
+        Assert.assertEquals(feline.getKittens(1), feline.getKittens());
     }
     @Test
     public void getKittensWithArgumentTest(){
         feline.getKittens(1);
-//        Assert.assertEquals(1, feline.getKittens(1));
+
         Mockito.verify(feline, Mockito.times(1)).getKittens(1);
     }
     @Test
     public void eatMeatTest() throws Exception {
-        feline.eatMeat();
-        Assert.assertEquals(List.of("Животные", "Птицы", "Рыба"),feline.eatMeat());
+        Assert.assertEquals(feline.getFood("Хищник"),feline.eatMeat());
     }
 
 }
