@@ -1,3 +1,4 @@
+import com.example.Animal;
 import com.example.Feline;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,27 +12,32 @@ import org.junit.Assert;
 public class TestFeline {
 
     @Spy
-    private Feline feline;
+    private Feline felineSpy;
 
     @Test
-    public void getFamilyTest(){
-        feline.getFamily();
+    public void getFamilyTest() {
+        Feline feline = new Feline();
         Assert.assertEquals("Кошачьи", feline.getFamily());
     }
 
     @Test
-    public void getKittensTest(){
-        Assert.assertEquals(feline.getKittens(1), feline.getKittens());
+    public void getKittensTest() {
+        felineSpy.getKittens();
+        Mockito.verify(felineSpy, Mockito.times(1)).getKittens(1);
     }
-    @Test
-    public void getKittensWithArgumentTest(){
-        feline.getKittens(1);
 
-        Mockito.verify(feline, Mockito.times(1)).getKittens(1);
+    @Test
+    public void getKittensWithArgumentTest() {
+        Feline feline = new Feline();
+        Assert.assertEquals(1, feline.getKittens(1));
     }
+
     @Test
     public void eatMeatTest() throws Exception {
-        Assert.assertEquals(feline.getFood("Хищник"),feline.eatMeat());
+        Feline feline = new Feline();
+        Animal animal = new Animal();
+        Assert.assertEquals(feline.eatMeat(), animal.getFood("Хищник"));
+
     }
 
 }
